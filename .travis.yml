@@ -1,0 +1,57 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - '8'
+python:
+  - "2.7"
+notifications:
+  email: false
+cache:
+  directories:
+    - node_modules
+env:
+  global:
+    - NODE_ENV=development
+before_install:
+  - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+  - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$AUTHOR_NAME"
+jobs:
+  include:
+    - stage: test
+      install:
+        - npm install
+        - sudo pip install unirest
+      before_script:
+        - export STAGE_NAME=test
+        - npm run testrpc
+        - npm run compile
+      script:
+        - python scripts/travis/exec_and_report.py lint
+        - python scripts/travis/exec_and_report.py test
+    - stage: code-coverage
+      if: branch = master
+      install:
+        - sudo pip install unirest
+        - sudo pip install bs4
+      before_script:
+        - export STAGE_NAME=coverage
+        - npm run rpcov
+        - npm run compile
+      script:
+       - python scripts/coverage/js-coverage.py
+       - python scripts/coverage/solidity-coverage.py
+      after_success:
+       - npm run merge-coverage
+       - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
+    - stage: deploy-to-production
+      if: branch = master
+      before_script: export STAGE_NAME=deploy
+      script:
+        - npm run build-prod
+      deploy:
+        provider: surge
+        project: ./dist/
+        domain: marvin.surge.sh
+        skip_cleanup: true
