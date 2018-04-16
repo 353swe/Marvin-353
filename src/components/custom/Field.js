@@ -75,7 +75,6 @@ class Field extends React.Component {
     }
   }
 
-
   // when reset props changes we reset the state value -> textbox or selected value
   reset() {
     this.setState({ value: '' });

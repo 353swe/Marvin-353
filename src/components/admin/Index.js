@@ -8,25 +8,25 @@ const Index = () => (
     <CardWithIcon
       title="Confirm teacher accounts"
       text="Confirm pending unconfirmed users for teacher role."
-      image="default.png"
+      image="confirm.png"
       links={[{ path: '/', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
       title="Confirm student accounts"
       text="Confirm pending unconfirmed users for student role."
-      image="default.png"
+      image="confirm.png"
       links={[{ path: '/', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
       title="Manage teacher accounts"
       text="Manage all teacher accounts present in the University"
-      image="default.png"
+      image="manageAdmin.png"
       links={[{ path: '/', label: 'Click here to manage' }]}
     />
     <CardWithIcon
       title="Manage student accounts"
       text="Manage all student accounts present in the University"
-      image="default.png"
+      image="manageAdmin.png"
       links={[{ path: '/', label: 'Click here to manage' }]}
     />
   </div>

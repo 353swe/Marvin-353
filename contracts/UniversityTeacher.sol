@@ -104,8 +104,7 @@ contract UniversityTeacher is UniversityAdmin {
 
         //remove from teacher
         uint currentIndex = teachers[_teacher];
-        teachersByIndex[currentIndex] = teachersByIndex[countTeachersByIndex];
-        delete teachers[_teacher];
+        teachersByIndex[currentIndex] = teachersByIndex[countTeachersByIndex-1];
         countTeachersByIndex -= 1;
 
         //correct the map public address => contract address
@@ -116,8 +115,7 @@ contract UniversityTeacher is UniversityAdmin {
     function removeUnconfirmedTeacher(address _askingAccount, Teacher _teacher) private {
         //remove from unconfirmed
         uint currentIndex = unconfirmedTeachers[_teacher];
-        unconfirmedTeachersByIndex[currentIndex] = unconfirmedTeachersByIndex[countUnconfirmedTeachersByIndex];
-        delete unconfirmedTeachers[_teacher];
+        unconfirmedTeachersByIndex[currentIndex] = unconfirmedTeachersByIndex[countUnconfirmedTeachersByIndex-1];
         countUnconfirmedTeachersByIndex -= 1;
 
         //correct the map public address => contract address

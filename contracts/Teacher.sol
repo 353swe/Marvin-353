@@ -55,7 +55,7 @@ contract Teacher is User {
     }
 
     function removeExamByIndex(uint _examIndex) private { // validExamIndex(_examIndex)
-        assignedExam[_examIndex + 1] = assignedExam[countAssignedExam];
+        assignedExam[_examIndex + 1] = assignedExam[countAssignedExam-1];
         countAssignedExam -= 1;
     }
 }

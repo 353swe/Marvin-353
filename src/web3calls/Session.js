@@ -5,14 +5,14 @@ import { getTeacherContractFromPublicAddress } from './UniversityTeacher';
 import { getName, getSurname } from './User';
 import { getCourseContract } from './Student';
 import { getName as getCourseName } from './Course';
-import { bytes32ToString } from '../util/web3/helpers';
+import { toText } from '../util/web3/textConverter';
 
 async function userData(addr) {
   const name = await getName(addr);
   const surname = await getSurname(addr);
   return {
-    name: bytes32ToString(name),
-    surname: bytes32ToString(surname),
+    name: toText(name),
+    surname: toText(surname),
   };
 }
 
@@ -22,7 +22,7 @@ const getStudentData = (role) => {
   return getStudentContractFromPublicAddress().then((addr) => {
     getCourseContract(addr).then((courseContract) => {
       getCourseName(courseContract).then(name =>
-        Object.assign({}, userData(addr), { course: bytes32ToString(name) }));
+        Object.assign({}, userData(addr), { course: toText(name) }));
     });
   });
 };

@@ -73,8 +73,7 @@ contract Exam {
     onlyFromUniversityContract {
         uint index = listSubscriber[_address];
         if (index != 0) {
-            listSubscriberByIndex[index] = listSubscriberByIndex[countListSubscriberByIndex];
-            delete listSubscriber[_address];
+            listSubscriberByIndex[index] = listSubscriberByIndex[countListSubscriberByIndex-1];
             countListSubscriberByIndex -= 1;
         }
     }

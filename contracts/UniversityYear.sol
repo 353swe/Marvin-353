@@ -47,7 +47,7 @@ contract UniversityYear is UniversityStudent {
     function removeAcademicYear(uint16 _year) public onlyFounder yearFound(_year) yearEmpty(_year) {
         delete listYearsBySolarYear[_year];
         uint currentIndex = listYears[_year];
-        listYearsByIndex[currentIndex] = listYearsByIndex[countYearsByIndex];
+        listYearsByIndex[currentIndex] = listYearsByIndex[countYearsByIndex-1];
         delete listYears[_year];
         countYearsByIndex -= 1;
     }

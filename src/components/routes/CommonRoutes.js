@@ -1,7 +1,7 @@
-import testForm from '../template/testForm';
 import Help from '../public/Help';
 import License from '../public/License';
 import NotFound from '../public/NotFound';
+import Price from '../public/Price';
 
 const CommonRoutes = [
   {
@@ -14,7 +14,7 @@ const CommonRoutes = [
     path: 'price',
     label: 'Price',
     position: 'right',
-    component: testForm,
+    component: Price,
   },
   {
     path: 'license',
