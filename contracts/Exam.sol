@@ -74,6 +74,7 @@ contract Exam {
         uint index = listSubscriber[_address];
         if (index != 0) {
             listSubscriberByIndex[index] = listSubscriberByIndex[countListSubscriberByIndex-1];
+            delete listSubscriber[_address];
             countListSubscriberByIndex -= 1;
         }
     }
