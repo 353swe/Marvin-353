@@ -10,7 +10,7 @@ class deleteButton extends React.Component {
   }
 
   handleClick() {
-    this.props.deleteFunction(this.props.objectToRemove);
+    this.props.deleteFunction(this.props.objectToRemove.item);
   }
 
   render() {
@@ -22,7 +22,8 @@ class deleteButton extends React.Component {
 
 deleteButton.propTypes = {
   deleteFunction: PropTypes.func.isRequired,
-  objectToRemove: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  objectToRemove: PropTypes.object.isRequired,
 };
 
 export default deleteButton;

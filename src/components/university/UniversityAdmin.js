@@ -47,7 +47,7 @@ function mapDispatchToProps(dispatch) {
     addAdmin: objArr => (
       dispatch(universitySagaAction.addNewAdminAction(objArr.addressAdmin.value))
     ),
-    deleteAdmin: address => dispatch(universitySagaAction.removeAdminAction(address)),
+    deleteAdmin: address => dispatch(universitySagaAction.removeAdminAction([address])),
     getAdmins: () => dispatch(universitySagaAction.getAllAdminsAction())
     ,
   };

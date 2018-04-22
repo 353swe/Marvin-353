@@ -25,14 +25,14 @@ function addNewAcademicYear(_year) {
   console.log(`add academic year, year ${_year}`);
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.addNewAcademicYear(_year), { from: web3.eth.accounts[0] });
+    instance.addNewAcademicYear(_year, { from: web3.eth.accounts[0] }));
 }
 
 function removeAcademicYear(_year) {
   console.log(`remove academic year, year ${_year}`);
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.removeAcademicYear(_year), { from: web3.eth.accounts[0] });
+    instance.removeAcademicYear(_year, { from: web3.eth.accounts[0] }));
 }
 
 export {

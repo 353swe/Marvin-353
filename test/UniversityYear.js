@@ -63,4 +63,41 @@ contract('UniversityYear', (accounts) => {
       await university.getAcademicYearContractAt.call(0),
     );
   });
+  it('Should add some academic years, delete some and recover the others', async () => {
+    assert.equal(await university.getAcademicYearNumber.call(), 0);
+    await university.addNewAcademicYear(2018, { from: accounts[0] });
+    await university.addNewAcademicYear(2019, { from: accounts[0] });
+    await university.addNewAcademicYear(2020, { from: accounts[0] });
+    await university.addNewAcademicYear(2021, { from: accounts[0] });
+    await university.addNewAcademicYear(2022, { from: accounts[0] });
+    await university.addNewAcademicYear(2023, { from: accounts[0] });
+    await university.addNewAcademicYear(2024, { from: accounts[0] });
+    await university.addNewAcademicYear(2025, { from: accounts[0] });
+    await university.addNewAcademicYear(2026, { from: accounts[0] });
+    await university.addNewAcademicYear(2027, { from: accounts[0] });
+    assert.equal(await university.getAcademicYearNumber.call(), 10);
+    await university.removeAcademicYear(2019, { from: accounts[0] });
+    await university.removeAcademicYear(2020, { from: accounts[0] });
+    await university.removeAcademicYear(2025, { from: accounts[0] });
+    await university.removeAcademicYear(2022, { from: accounts[0] });
+    await university.removeAcademicYear(2023, { from: accounts[0] });
+    await university.removeAcademicYear(2026, { from: accounts[0] });
+    assert.equal(await university.getAcademicYearNumber.call(), 4);
+    assert.equal(
+      await Year.at(await university.getAcademicYearContractAt.call(0)).getSolarYear.call(),
+      2018,
+    );
+    assert.equal(
+      await Year.at(await university.getAcademicYearContractAt.call(1)).getSolarYear.call(),
+      2027,
+    );
+    assert.equal(
+      await Year.at(await university.getAcademicYearContractAt.call(2)).getSolarYear.call(),
+      2024,
+    );
+    assert.equal(
+      await Year.at(await university.getAcademicYearContractAt.call(3)).getSolarYear.call(),
+      2021,
+    );
+  });
 });

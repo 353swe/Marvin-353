@@ -1,7 +1,7 @@
 import Duck from 'extensible-duck';
 const --Name--Duck = new Duck({
   namespace: 'marvin',
-  store: '',
+  store: '--Name--',
   types: [],
   initialState: {},
   reducer: (state, action, duck) => {
@@ -18,5 +18,5 @@ const --Name--Duck = new Duck({
 
   })
 });
-export const { creators, selectors } = --Name--Duck;
+export const { creators, selectors, initialState } = --Name--Duck;
 export default --Name--Duck.reducer;

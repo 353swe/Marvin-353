@@ -1,4 +1,5 @@
 import Duck from 'extensible-duck';
+import { copyNPush, copyNPop } from '../util/js_helpers';
 
 const AdminEmployerDuck = new Duck({
   namespace: 'marvin',
@@ -11,8 +12,6 @@ const AdminEmployerDuck = new Duck({
   },
   reducer: (state, action, duck) => {
     const { types } = duck;
-    let accounts;
-    let idx;
     switch (action.type) {
       case (types.SET_ADMINS_LIST):
         return {
@@ -22,20 +21,15 @@ const AdminEmployerDuck = new Duck({
           errored: false,
         };
       case (types.POP_ADMIN):
-        accounts = Object.assign([], state.adminAccount);
-        idx = accounts.findIndex(el => el === action.address);
-        if (idx > -1) accounts.splice(idx, 1);
         return {
           ...state,
-          adminAccount: accounts,
+          adminAccount: copyNPop(state.adminAccount, el => el === action.address),
           loading: false,
         };
       case (types.PUSH_ADMIN):
-        accounts = Object.assign([], state.adminAccount);
-        accounts.push(action.address);
         return {
           ...state,
-          adminAccount: accounts,
+          adminAccount: copyNPush(state.adminAccount, action.address),
           loading: false,
         };
       case (types.LIST_LOADING):
@@ -72,5 +66,5 @@ const AdminEmployerDuck = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = AdminEmployerDuck;
+export const { creators, selectors, initialState } = AdminEmployerDuck;
 export default AdminEmployerDuck.reducer;

@@ -46,7 +46,7 @@ class PageTableForm extends React.Component {
           <td>{item}</td>
           <td>
             {this.getEditButton()}
-            {this.getDeleteButton(item)}
+            {this.getDeleteButton({ item })}
           </td>
         </tr>
       ));

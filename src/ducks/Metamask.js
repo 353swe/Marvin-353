@@ -8,15 +8,12 @@ const MetamaskDuck = new Duck({
     present: true,
     account: '',
   },
-  reducer: (state, action, duck) => {
+  reducer: (state, action = {}, duck) => {
     const { types } = duck;
     const { initialState } = duck;
     switch (action.type) {
       case (types.LOGIN):
-        return {
-          ...state,
-          present: true,
-        };
+        return Object.assign({}, initialState, { present: true });
       case (types.LOGOUT):
         return {
           ...state,
@@ -59,5 +56,5 @@ const MetamaskDuck = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = MetamaskDuck;
+export const { creators, selectors, initialState } = MetamaskDuck;
 export default MetamaskDuck.reducer;

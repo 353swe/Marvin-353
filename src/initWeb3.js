@@ -22,17 +22,8 @@ const initWeb3 = () => {
       store.dispatch(creators.logout());
       store.dispatch(creators.setAddress(web3.eth.accounts[0]));
       store.dispatch(sessionCreators.cleanData());
-
-      // redirect with blacklist
-      if (
-        window.location.pathname !== '/price' &&
-        window.location.pathname !== '/help' &&
-        window.location.pathname !== '/license' &&
-        window.location.pathname !== '/'
-      ) {
-        window.location.replace('/');
-      }
       console.log('Switched account!');
+      document.location.href = '/';
     }
   }, 100);
 };

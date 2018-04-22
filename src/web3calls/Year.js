@@ -22,11 +22,11 @@ function getCourseContractAt(address, _index) {
 }
 
 
-function getSolarYear(address, _index) {
+function getSolarYear(address) {
   console.log('Year getSolarYear');
   const contractInstance = getYearContract(address);
   return contractInstance.then(instance =>
-    instance.getSolarYear(_index));
+    instance.getSolarYear());
 }
 
 function addNewCourse(address, _name, _creditsForGraduation) {

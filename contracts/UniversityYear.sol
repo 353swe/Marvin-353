@@ -31,7 +31,7 @@ contract UniversityYear is UniversityStudent {
     function getAcademicYearContractAt(uint _index) public view returns(Year) {
         return listYearsByIndex[_index + 1];
     }
-    
+
     function getAcademicYearContractByYear(uint16 _year) public view returns(Year) {
         return listYearsBySolarYear[_year];
     }
@@ -45,10 +45,14 @@ contract UniversityYear is UniversityStudent {
     }
 
     function removeAcademicYear(uint16 _year) public onlyFounder yearFound(_year) yearEmpty(_year) {
-        delete listYearsBySolarYear[_year];
-        uint currentIndex = listYears[_year];
-        listYearsByIndex[currentIndex] = listYearsByIndex[countYearsByIndex-1];
-        delete listYears[_year];
+        address yearContractToRemove = getAcademicYearContractByYear(_year);
+        address yearContractToMove = listYearsByIndex[countYearsByIndex - 1];
+        uint yearIndexToRemove = listYears[yearContractToRemove];
+        listYearsByIndex[yearIndexToRemove] = Year(yearContractToMove);
+        listYears[yearContractToMove] = yearIndexToRemove;
         countYearsByIndex -= 1;
+        delete listYearsBySolarYear[_year];
+        // not useful
+        // delete listYears[_year];
     }
 }

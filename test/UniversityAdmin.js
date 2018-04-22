@@ -53,7 +53,6 @@ contract('UniversityAdmin', (accounts) => {
   it('Should remove an admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     await contract.removeAdmin(accounts[1], { from: accounts[0] });
-    assert.equal(await contract.getAdminAt(0), 0);
     assert.equal(await contract.getAdminNumber(), 0);
   });
 

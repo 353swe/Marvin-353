@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavbarCustom from './custom/NavbarCustom';
 import Footer from './custom/Footer';
+import ErrorTaker from './custom/ErrorTaker';
 
 class PageContainer extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class PageContainer extends React.Component {
       <div>
         <NavbarCustom links={this.links} loggedIn={this.loggedIn} />
         <div className="container">
-          {this.children}
+          <ErrorTaker>
+            {this.children}
+          </ErrorTaker>
         </div>
         <Footer />
       </div>
