@@ -1,3 +1,5 @@
+import { toText } from '../util/web3/textConverter';
+
 const contract = require('truffle-contract');
 const contractExamJson = require('../../build/contracts/Exam.json');
 
@@ -11,7 +13,7 @@ function getEnrolledNumber(address) {
   console.log('Exam getEnrolledNumber');
   const contractInstance = getExamContract(address);
   return contractInstance.then(instance =>
-    instance.getEnrolledNumber.call());
+    instance.getEnrolledNumber.call().then(Number));
 }
 
 function getEnrolledContractAt(address, _index) {
@@ -32,7 +34,7 @@ function getName(address) {
   console.log('Exam getName');
   const contractInstance = getExamContract(address);
   return contractInstance.then(instance =>
-    instance.getName.call());
+    instance.getName.call().then(toText));
 }
 
 function getTeacherContract(address) {
@@ -46,14 +48,14 @@ function getObligatoriness(address) {
   console.log('Exam getObligatoriness');
   const contractInstance = getExamContract(address);
   return contractInstance.then(instance =>
-    instance.getObligatoriness.call());
+    instance.getObligatoriness.call().then(Boolean));
 }
 
 function getCredits(address) {
   console.log('Exam getCredits');
   const contractInstance = getExamContract(address);
   return contractInstance.then(instance =>
-    instance.getCredits.call());
+    instance.getCredits.call().then(Number));
 }
 
 function addMeAsSubscriber(address) {

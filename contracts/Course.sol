@@ -16,11 +16,11 @@ contract Course {
     uint16 private creditsToGraduation;
     Year private year;
     UniversityStudent private university;
+
     /**
     @notice Modifier that allows admins only to do particular actions
     @dev If the current user is not an admin, the action is reverted
     */
-
     modifier onlyAdmin {
         if (!university.isAdmin(msg.sender)) revert();
         _;
@@ -79,7 +79,7 @@ contract Course {
     function getSolarYear() public view returns(uint16) {
         return year.getSolarYear();
     }
-    
+
     /**
     @notice Add a new exam in the selected course
     @dev This can be done only by an admin

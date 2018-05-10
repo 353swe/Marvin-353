@@ -1,6 +1,6 @@
-import Index from '../public/Index';
-import Register from '../public/Register';
-import LoginPage from '../public/LoginPage';
+import Index from '../public/Index'; // eslint-disable-line import/no-named-as-default
+import Register from '../public/Register'; // eslint-disable-line import/no-named-as-default
+import LoginPage from '../public/LoginPage'; // eslint-disable-line import/no-named-as-default
 
 const PublicRoutes = [
   {

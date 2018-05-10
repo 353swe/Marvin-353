@@ -1,5 +1,6 @@
-const toBytes32 = text => web3.fromAscii(text).replace(/\u0000/g, '');
+const toBytes32 = text => (text !== null ? web3.fromUtf8(text) : null);
 
-const toText = hex => web3.toAscii(hex);
+const toText = hex =>
+  (hex !== null ? web3.toUtf8(hex).replace(/\u0000/g, '').replace(/\0/g, '') : null);
 
 export { toBytes32, toText };

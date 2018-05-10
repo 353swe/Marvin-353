@@ -10,6 +10,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateStateFields = this.updateStateFields.bind(this);
     this.allValidFields = this.allValidFields.bind(this);
     this.state = { reset: false, fields: {} };
 
@@ -30,10 +31,20 @@ class Form extends React.Component {
     event.preventDefault();
     if (this.allValidFields()) {
     // if submit == TRUE == Success reset the form
-    //  if (this.props.submitFunction() === 1){  }
-      this.props.submitFunction(this.state.fields);
-      this.setState({ reset: !this.state.reset });
+      if (this.props.submitFunction !== undefined) {
+        this.props.submitFunction(this.state.fields);
+        this.setState({ reset: !this.state.reset });
+      }
     }
+  }
+
+  updateStateFields(field, e) {
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        [field.name]: { value: e, valid: field.validateFunction(e) },
+      },
+    }));
   }
 
   render() {
@@ -42,9 +53,7 @@ class Form extends React.Component {
       fields.push(<Field
         {...field}
         onChangeValue={(e) => {
-        this.setState({
- fields: { ...this.state.fields, [field.name]: { value: e, valid: field.validateFunction(e) } },
-        });
+          this.updateStateFields(field, e);
       }}
         reset={this.state.reset}
         key={Utils.generateKey(field.name)}
@@ -70,7 +79,7 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
-  submitFunction: () => -1,
+  submitFunction: undefined,
   fields: [],
   description: '',
 };

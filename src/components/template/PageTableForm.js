@@ -1,62 +1,74 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
-import Button from 'react-bootstrap/lib/Button';
-import Form from '../custom/Form';
-import DeleteButton from '../custom/deleteButton';
+import TemplateButton from '../custom/TemplateButton';
 import Utils from '../custom/utils';
 
 
 class PageTableForm extends React.Component {
+  static checkBooleanValue(item) {
+    if (item === true || item === false) {
+      return item ? 'Yes' : 'No';
+    }
+    return item;
+  }
+
+  static getButton(key, item) {
+    return (
+      <td key={Utils.generateKey(key)}>
+        <TemplateButton
+          clickFunction={key.buttonFunction}
+          objectToWorkOn={item}
+          text={key.buttonText}
+          type={key.buttonType}
+        />
+      </td>
+    );
+  }
+
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getEditButton = this.getEditButton.bind(this);
-    this.getDeleteButton = this.getDeleteButton.bind(this);
-    this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
+    this.getRow = this.getRow.bind(this);
   }
 
   componentWillMount() {
     this.refreshData();
   }
 
-  getEditButton() {
-    if (this.props.editTableData() !== -1) {
-      return (
-        <Button onClick={this.props.editTableData}>Edit button</Button>
-      );
+  getRow(item, nonce) {
+    const headers = this.props.headerInfo.map(header => header.toLowerCase());
+    if (item instanceof Object) {
+      if (this.props.columFilter) {
+        return Object.keys(item).filter(key => headers.includes(key.toLowerCase())).map((key, i) =>
+          (
+            <td key={Utils.generateKey(item[key]).concat(i).concat(nonce)}>
+              {PageTableForm.checkBooleanValue(item[key])}
+            </td>
+          ));
+      }
+      return Object.keys(item).map((key, i) => (
+        <td key={Utils.generateKey(item[key]).concat(i).concat(nonce)} >
+          {PageTableForm.checkBooleanValue(item[key])}
+        </td>
+      ));
     }
-    return null;
-  }
-
-  getDeleteButton(item) {
-    if (this.props.deleteTableData() !== -1) {
-      return (
-        <DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} />
-      );
-    }
-    return null;
+    return (
+      <td key={Utils.generateKey(item).concat(nonce)} >{PageTableForm.checkBooleanValue(item)}</td>
+    );
   }
 
   getRows() {
-    return this.props.tableData.map(item =>
+    return this.props.tableData.map((item, nonce) =>
       (
         <tr key={Utils.generateKey(item)}>
-          <td>{item}</td>
-          <td>
-            {this.getEditButton()}
-            {this.getDeleteButton({ item })}
-          </td>
+          {this.getRow(item, nonce)}
+          {this.props.tableButtons.map(key => (
+            PageTableForm.getButton(key, item)
+          ))}
         </tr>
       ));
-  }
-
-  isFormRequired() {
-    if (this.props.addTableData() !== -1) {
-      return <Form submitFunction={this.props.getTableData} />;
-    }
-    return null;
   }
 
   refreshData() {
@@ -68,18 +80,18 @@ class PageTableForm extends React.Component {
       <th key={Utils.generateKey(item)}>{item}</th>);
     return (
       <div>
-        {this.isFormRequired()}
         <Table striped bordered condensed hover>
           <thead>
             <tr>
               {tableHead}
-              <th />
             </tr>
           </thead>
           <tbody>
             {this.getRows()}
           </tbody>
         </Table>
+        {this.props.tableData.length === 0 &&
+        <div> <h5 className="text-center">There is no data to display!</h5> </div>}
       </div>
     );
   }
@@ -87,17 +99,16 @@ class PageTableForm extends React.Component {
 
 PageTableForm.propTypes = {
   getTableData: PropTypes.func.isRequired,
-  editTableData: PropTypes.func,
-  deleteTableData: PropTypes.func,
-  addTableData: PropTypes.func,
-  tableData: PropTypes.arrayOf(String).isRequired,
+  tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
+  // Temporaneamente not required, ma da aggiornare in isRequired piu avanti
+  tableButtons: PropTypes.arrayOf(Object),
+  columFilter: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
-  editTableData: () => -1,
-  deleteTableData: () => -1,
-  addTableData: () => -1,
+  columFilter: false,
+  tableButtons: [],
 };
 
 export default PageTableForm;

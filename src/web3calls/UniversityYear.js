@@ -4,11 +4,11 @@ function getAcademicYearNumber() {
   console.log('get academic year number');
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.getAcademicYearNumber.call());
+    instance.getAcademicYearNumber.call().then(Number));
 }
 
 function getAcademicYearContractAt(_index) {
-  console.log(`et academic year contract at ${_index}`);
+  console.log(`get academic year contract at ${_index}`);
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
     instance.getAcademicYearContractAt.call(_index));

@@ -1,7 +1,7 @@
 var HDWalletProvider = require('truffle-hdwallet-provider');
 
-var infura_apikey = 'XXXXXXXXXXXXXXXXX';
-var mnemonic = 'enter the 12 words seed here';
+var infura_apikey = 'XXXXXXXXXXXXXXXXXXXXX';
+var mnemonic = 'insert your 12 word seed here';
 
 module.exports = {
   solc: {

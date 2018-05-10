@@ -1,34 +1,39 @@
 import RoleMap from '../util/logic/AccountEnum';
 import { login } from './University';
-import { getStudentContractFromPublicAddress } from './UniversityStudent';
-import { getTeacherContractFromPublicAddress } from './UniversityTeacher';
+import { getStudentContractFromPublicAddress, requestStudentAccount } from './UniversityStudent';
+import { getTeacherContractFromPublicAddress, requestTeacherAccount } from './UniversityTeacher';
 import { getName, getSurname } from './User';
 import { getCourseContract } from './Student';
 import { getName as getCourseName } from './Course';
-import { toText } from '../util/web3/textConverter';
 
 async function userData(addr) {
   const name = await getName(addr);
   const surname = await getSurname(addr);
   return {
-    name: toText(name),
-    surname: toText(surname),
+    name,
+    surname,
   };
 }
 
 // Da testare probabilment non funziona
-const getStudentData = (role) => {
+const getStudentData = async (role) => {
   if (role === RoleMap.UNCONFIRMED_STUDENT) return {};
-  return getStudentContractFromPublicAddress().then((addr) => {
-    getCourseContract(addr).then((courseContract) => {
-      getCourseName(courseContract).then(name =>
-        Object.assign({}, userData(addr), { course: toText(name) }));
-    });
-  });
+  const stdContr = await getStudentContractFromPublicAddress(web3.eth.accounts[0]);
+  const courseContract = await getCourseContract(stdContr);
+  const stdData = await userData(stdContr);
+  const courseName = await getCourseName(courseContract);
+  return Object.assign(
+    {},
+    stdData,
+    { courseName, courseContract },
+    { contract: stdContr },
+  );
 };
-const getTeacherData = (role) => {
+const getTeacherData = async (role) => {
   if (role === RoleMap.UNCONFIRMED_TEACHER) return {};
-  return getTeacherContractFromPublicAddress().then(addr => userData(addr));
+  const tchContr = await getTeacherContractFromPublicAddress(web3.eth.accounts[0]);
+  const tchData = await userData(tchContr);
+  return Object.assign({}, tchData, { contract: tchContr });
 };
 
 const getRole = () => login().then(role => role);
@@ -46,4 +51,9 @@ const getData = (role) => {
   }
 };
 
-export { getRole, getData };
+const signUp = (name, surname, course) => {
+  if (course === null) return requestTeacherAccount(name, surname);
+  return requestStudentAccount(name, surname, course);
+};
+
+export { getRole, getData, signUp };

@@ -15,7 +15,6 @@ export function* addYear(action) {
     yield call(UniversityYear.addNewAcademicYear, solarYear);
     yield put(actionCreators.pushAccademicYear(solarYear));
   } catch (e) {
-    console.log(e);
     yield put(actionCreators.listHasErrored());
   }
 }
@@ -32,15 +31,14 @@ export function* removeEmptyYear(action) {
 export function* getAllYears() {
   yield put(actionCreators.listIsLoading());
   try {
-    let yearNumber = yield call(UniversityYear.getAcademicYearNumber);
-    yearNumber = Number(yearNumber);
+    const yearNumber = yield call(UniversityYear.getAcademicYearNumber);
     const getYearsAddressCalls = Array(yearNumber).fill().map((_, i) => (
       call(UniversityYear.getAcademicYearContractAt, i)
     ));
     const contracts = yield all(getYearsAddressCalls);
     const getYearAddress = contracts.map(addr => call(Year.getSolarYear, addr));
     const solarYears = yield all(getYearAddress);
-    yield put(actionCreators.setAccademicYearList(solarYears.map(year => Number(year))));
+    yield put(actionCreators.setAccademicYearList(solarYears));
   } catch (e) {
     console.log('Fail to get years');
     yield put(actionCreators.listHasErrored());

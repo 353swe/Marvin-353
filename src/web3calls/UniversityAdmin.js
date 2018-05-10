@@ -18,7 +18,7 @@ function getAdminNumber() {
   console.log('getting admin number');
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.getAdminNumber.call());
+    instance.getAdminNumber.call().then(Number));
 }
 
 function addNewAdmin(addressToAdd) {
@@ -36,4 +36,3 @@ function removeAdmin(addressToRemove) {
 }
 
 export { isAdmin, getAdminAt, getAdminNumber, addNewAdmin, removeAdmin };
-

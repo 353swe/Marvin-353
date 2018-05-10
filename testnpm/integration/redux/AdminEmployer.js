@@ -19,7 +19,8 @@ const filledState = {
 };
 describe('AdminEmployer feature', () => {
   describe('add new admin', () => {
-    it('should succesfully add the admin provided', () => expectSaga(sagas.addAdmin, { address: 'pippo' })
+    // 1
+    it('should succesfully add the admin provided', () => expectSaga(sagas.addAdmin, sagas.creators.addNewAdminAction('pippo'))
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(UniversityAdmin.addNewAdmin), true],
@@ -31,7 +32,8 @@ describe('AdminEmployer feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should fail gently when add an admin that already exist', () => expectSaga(sagas.addAdmin, { address: 'pippo' })
+    // 2
+    it('should fail gently when add an admin that already exist', () => expectSaga(sagas.addAdmin, sagas.creators.addNewAdminAction('pippo'))
       .withReducer(reducer, filledState)
       .provide([
         [matchers.call.fn(UniversityAdmin.addNewAdmin), throwError(new Error())],
@@ -40,7 +42,8 @@ describe('AdminEmployer feature', () => {
       .run());
   });
   describe('remove admin', () => {
-    it('should remove the correct admin', () => expectSaga(sagas.removeAdmin, { address: 'pippo' })
+    // 3
+    it('should remove the correct admin', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pippo'))
       .withReducer(reducer, filledState)
       .provide([
         [matchers.call.fn(UniversityAdmin.removeAdmin), true],
@@ -51,7 +54,8 @@ describe('AdminEmployer feature', () => {
         adminAccount: ['topolino', 'paperino'],
       })
       .run());
-    it('shouldnt remove an admin that not exist', () => expectSaga(sagas.removeAdmin, { address: 'pluto' })
+    // 4
+    it('shouldnt remove an admin that does not exist', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pluto'))
       .withReducer(reducer, filledState)
       .provide([
         [matchers.call.fn(UniversityAdmin.removeAdmin), true],
@@ -60,7 +64,8 @@ describe('AdminEmployer feature', () => {
       .run());
   });
   describe('get admin list', () => {
-    it('should get the list', () => expectSaga(sagas.getAllAdmins)
+    // 5
+    it('should get the list', () => expectSaga(sagas.getAllAdmins, sagas.creators.getAllAdminsAction())
       .withReducer(reducer, failedState)
       .provide({
         call() {

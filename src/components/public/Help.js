@@ -22,15 +22,19 @@ const Help = () => {
         <li><a href="#faq7">How do I restore my MetaMask digital wallet?</a></li>
       </ul>
       <h3><a href="/help#faq1" className="faq" name="faq1">What it is Marvin?</a></h3>
+      <p>
       Marvin is a ÐApp for universities, teachers and students.
+      </p>
       <h3><a href="/help#faq2" className="faq" name="faq2">What software do I need to use Marvin?</a></h3>
-      You need:
+      <p>You need:</p>
       <ul>
         <li>A device with <a href="https://www.google.com/intl/en/chrome/">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> browser installed;</li>
         <li>A MetaMask digital wallet</li>
       </ul>
-      <strong>WARNING:</strong> If you use a mobile device, like a smartphone or a table,
-      you need to use Mozilla Firefox.
+      <p>
+        <strong>WARNING:</strong> If you use a mobile device, like a smartphone or a table,
+        you need to use Mozilla Firefox.
+      </p>
       <h3><a href="/help#faq3" className="faq" name="faq3">How do I install MetaMask?</a></h3>
       <ul>
         <li>If you use Chrome, go <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">here</a> and click &quot;Add to Chrome&quot;. Or, if you use Firefox go <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">here</a> and click &quot;Add to Firefox&quot;<br />
@@ -61,36 +65,37 @@ const Help = () => {
         <Image alt="" src="/media/help/MetamaskAddToFirefoxUnlock.jpg" rounded responsive />
       </p>
       <h3><a href="/help#faq5" className="faq" name="faq5">How can I logout from Marvin?</a></h3>
-      <p>To logout from Marvin, you have to logout from MetaMask:
-        <ul>
-          <li>Click on MetaMask plug-in icon</li>
-          <li>Click on the menu button in the top right corner</li>
-          <li>Click &#39;Log Out&#39;</li>
-        </ul>
+      <p>To logout from Marvin, you have to logout from MetaMask:</p>
+      <ul>
+        <li>Click on MetaMask plug-in icon</li>
+        <li>Click on the menu button in the top right corner</li>
+        <li>Click &#39;Log Out&#39;</li>
+      </ul>
+      <p>
         <Image alt="" src="/media/help/MetamaskAddToFirefoxLock.jpg" rounded responsive />
       </p>
       <h3><a href="/help#faq6" className="faq" name="faq6">How can I lock my MetaMask digital wallet?</a></h3>
       <p>
         For security reasons, it is raccomanded to lock MetaMask before leaving the computer.
         To do this, perform the following steps:
-        <ul>
-          <li>Click the MetaMask browser extension icon</li>
-          <li>Click on the menu a the top right</li>
-          <li>Click &quot;Log out&quot;</li>
-        </ul>
       </p>
+      <ul>
+        <li>Click the MetaMask browser extension icon</li>
+        <li>Click on the menu a the top right</li>
+        <li>Click &quot;Log out&quot;</li>
+      </ul>
       <h3><a href="/help#faq7" className="faq" name="faq7">How do I restore my MetaMask digital wallet?</a></h3>
       <p>
         To move you account on a new PC or browser or in case you have lost your password,
         you can follow the following steps:
-        <ul>
-          <li>Click the MetaMask browser extension icon and then click
-            &quot;Restore from seed phrase&quot;
-          </li>
-          <li>Copy and paste the 12 seed words in the box and then set a new password</li>
-          <li>Click &quot;OK&quot;</li>
-        </ul>
       </p>
+      <ul>
+        <li>Click the MetaMask browser extension icon and then click
+            &quot;Restore from seed phrase&quot;
+        </li>
+        <li>Copy and paste the 12 seed words in the box and then set a new password</li>
+        <li>Click &quot;OK&quot;</li>
+      </ul>
     </div>
   );
 };

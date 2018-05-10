@@ -23,7 +23,7 @@
     "start": "start http://localhost:8080 & webpack-dev-server --inline --hot --watch --history-api-fallback --host localhost --port 8080 --devtool source-map",
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack -p --config webpack.prod.config.js",
-    "test": "mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
+    "test": "mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles --timeout 10000",
     "test-watch": "npm test -- --watch",
     "custom-test": "mocha --compilers js:babel-register --require babel-polyfill --require ignore-styles",
     "solidityC": "echo Solidity",
@@ -52,7 +52,17 @@
   },
   "nyc": {
     "include": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "src/web3calls/UniversityContractSupplier.js"
+    ],
+    "exclude": [
+      "src/index.js",
+      "src/initWeb3.js",
+      "src/reducers.js",
+      "src/sagas.js",
+      "src/store.js",
+      "src/web3calls/**/*.js",
+      "src/util/web3/**/*.js"
     ],
     "report-dir": "./js-coverage",
     "all": true

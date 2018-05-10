@@ -7,7 +7,6 @@ class CardWithIcon extends React.Component {
     this.title = this.props.title;
     this.text = this.props.text;
     this.links = this.props.links;
-    this.icon = this.props.icon;
     this.image = this.props.image;
   }
   render() {
@@ -18,30 +17,6 @@ class CardWithIcon extends React.Component {
       }
     }
     const card = '/media/cards/'.concat(this.image);
-    let icon = '';
-    if (this.icon !== '') {
-      let bicon = '';
-      switch (this.icon) {
-        case 'list':
-          bicon = 'glyphicon glyphicon-th-list';
-          break;
-        case 'no':
-          bicon = 'glyphicon glyphicon-remove-circle';
-          break;
-        case 'yes':
-          bicon = 'glyphicon glyphicon-ok-circle';
-          break;
-        case 'education':
-          bicon = 'glyphicon glyphicon-education';
-          break;
-        case 'user':
-          bicon = 'glyphicon glyphicon-user';
-          break;
-        default:
-          bicon = 'glyphicon glyphicon-info-sign';
-      }
-      icon = <span className={bicon} />;
-    }
     let fastLink = '#';
     if (this.links.length === 1) {
       fastLink = this.links[0].path;
@@ -52,7 +27,7 @@ class CardWithIcon extends React.Component {
         <div className="card">
           <img className="card-img-top" src={card} alt="Card with icon" />
           <div className="card-body">
-            <h5 className="card-title">{this.title}{icon}</h5>
+            <h5 className="card-title">{this.title}</h5>
             <p className="card-text">{this.text} </p>
           </div>
           <div className="card-body">
@@ -66,7 +41,6 @@ class CardWithIcon extends React.Component {
 
 CardWithIcon.defaultProps = {
   links: [],
-  icon: '',
   image: 'default.png',
 };
 
@@ -75,7 +49,6 @@ CardWithIcon.propTypes = {
   text: PropTypes.string.isRequired,
   // eslint-disable-next-line
   links: PropTypes.array,
-  icon: PropTypes.string,
   image: PropTypes.string,
 };
 

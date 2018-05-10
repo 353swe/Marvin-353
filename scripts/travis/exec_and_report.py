@@ -19,7 +19,7 @@ try:
         script = script_str.split(" ")
         process = subprocess.Popen(script)
         process.communicate()
-        if process.returncode is 1:
+        if process.returncode is not 0:
             failed = True
             unirest.post(
                 "http://api.353swe.ml/metrics/failed_test.php",

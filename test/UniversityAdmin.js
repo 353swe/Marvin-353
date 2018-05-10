@@ -9,30 +9,30 @@ contract('UniversityAdmin', (accounts) => {
   beforeEach('Deploy University contract on blockchain', async () => {
     contract = await UniversityAdmin.new({ from: accounts[0] });
   });
-
+  // 7
   it('Should say only University is registered', async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
     assert.equal(await contract.isUniversityFounder.call(accounts[1]), false);
     assert.equal(await contract.isUniversityFounder.call(accounts[2]), false);
     assert.equal(await contract.isUniversityFounder.call(accounts[3]), false);
   });
-
+  // 8
   it('Should login with university with code 0', async () => {
     assert.equal(await contract.login.call({ from: accounts[0] }), 1);
     assert.equal(await contract.login.call({ from: accounts[1] }), 0);
     assert.equal(await contract.login.call({ from: accounts[2] }), 0);
   });
-
+  // 9
   it('Should add new admin!', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     assert.equal(await contract.isAdmin.call(accounts[1]), true);
   });
-
+  // 10
   it('Should login with code 2 if is an admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     assert.equal(await contract.login.call({ from: accounts[1] }), 2);
   });
-
+  // 11
   it('Should register the admin number', async () => {
     assert.equal(await contract.getAdminNumber(), 0);
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
@@ -44,18 +44,18 @@ contract('UniversityAdmin', (accounts) => {
     await contract.addNewAdmin(accounts[4], { from: accounts[0] });
     assert.equal(await contract.getAdminNumber(), 4);
   });
-
+  // 12
   it('Should return the correct admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     assert.equal(await contract.getAdminAt(0), accounts[1]);
   });
-
+  // 13
   it('Should remove an admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     await contract.removeAdmin(accounts[1], { from: accounts[0] });
     assert.equal(await contract.getAdminNumber(), 0);
   });
-
+  // 14
   it('Should not add existing admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     try {
@@ -65,7 +65,7 @@ contract('UniversityAdmin', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 15
   it('Only founder can add new admin', async () => {
     try {
       await contract.addNewAdmin(accounts[1], { from: accounts[1] });
@@ -74,7 +74,7 @@ contract('UniversityAdmin', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 16
   it('Only founder can remove an admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     try {
@@ -84,6 +84,7 @@ contract('UniversityAdmin', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 17
   it('Should not remove an invalid admin', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     try {

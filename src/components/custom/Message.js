@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { Button, Modal } from 'react-bootstrap';
 
 class MessageBox extends React.Component {
@@ -50,9 +50,9 @@ class MessageBox extends React.Component {
 }
 
 MessageBox.propTypes = {
-  message: PropType.string.isRequired,
-  type: PropType.string.isRequired,
-  onHide: PropType.func.isRequired,
+  message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onHide: PropTypes.func.isRequired,
 };
 
 export default (MessageBox);

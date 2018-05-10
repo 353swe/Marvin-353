@@ -16,7 +16,7 @@ contract('User', (accounts) => {
   function bytes32ToString(stringToConvert) {
     return web3.toAscii(stringToConvert).replace(/\u0000/g, '');
   }
-
+  // 53
   it('Should give the deployed User', async () => {
     assert.equal(bytes32ToString(await contract.getName.call()), 'mario');
     assert.equal(bytes32ToString(await contract.getSurname.call()), 'rossi');

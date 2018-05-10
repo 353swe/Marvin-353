@@ -29,7 +29,7 @@ contract('Course', (accounts) => {
     await year.addNewCourse(123, 180, { from: accounts[1] });
     course = Course.at(await year.getCourseContractAt.call(0));
   });
-
+  // 82
   it('Should have the correct data', async () => {
     assert.equal(await course.getExamNumber.call(), 0);
     assert.equal(
@@ -39,13 +39,13 @@ contract('Course', (accounts) => {
     assert.equal(await course.getCreditsToGraduate.call(), 180);
     assert.equal(await course.getSolarYear.call(), 2018);
   });
-
+  // 83
   it('Should add an exam', async () => {
     assert.equal(await course.getExamNumber.call(), 0);
     await course.addNewExam(123, 12, true, { from: accounts[1] });
     assert.equal(await course.getExamNumber.call(), 1);
   });
-
+  // 84
   it('Only the admin can add an exam', async () => {
     try {
       await course.addNewExam(123, 12, true, { from: accounts[2] });

@@ -6,22 +6,35 @@ import assert from 'assert';
 import NavbarCustom from '../../../src/components/custom/NavbarCustom';
 
 describe('NavbarCustom component', () => {
+  // 116
   it('should render the component', () => {
     const wrapper = shallow(<NavbarCustom />);
     assert.equal(wrapper.length, 1);
-  });
+  });// 117
   it('should have the links', () => {
-    const wrapper = shallow(<NavbarCustom />);
+    const TestComp = () => (<p>Test</p>);
+    const wrapper = shallow(<NavbarCustom
+      loggedIn
+      links={[{
+        path: 'testlink1',
+        label: 'test1',
+        position: 'left',
+        component: TestComp,
+}]}
+    />);
     assert.equal(wrapper.find(Nav) !== -1, true);
   });
+  // 118
   it('should have the header', () => {
     const wrapper = shallow(<NavbarCustom />);
     assert.equal(wrapper.find(Navbar.Header) !== -1, true);
   });
+  // 119
   it('should have the brand', () => {
     const wrapper = shallow(<NavbarCustom />);
     assert.equal(wrapper.find(Navbar.Brand) !== -1, true);
   });
+  // 120
   it('should have the links', () => {
     // eslint-disable-next-line
     const TestComp = () => {

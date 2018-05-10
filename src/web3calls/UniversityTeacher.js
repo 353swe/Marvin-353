@@ -4,7 +4,7 @@ function getTeacherNumber() {
   console.log('get teacher number');
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.getTeacherNumber.call());
+    instance.getTeacherNumber.call().then(Number));
 }
 
 function getTeacherContractAddressAt(_index) {
@@ -18,7 +18,7 @@ function getNotApprovedTeacherNumber() {
   console.log('get not approved teacher number');
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.getNotApprovedTeacherNumber.call());
+    instance.getNonApprovedTeacherNumber.call().then(Number));
 }
 
 function getNotApprovedTeacherContractAddressAt(_index) {
@@ -94,4 +94,3 @@ export {
   denyTeacher,
   removeTeacher,
 };
-

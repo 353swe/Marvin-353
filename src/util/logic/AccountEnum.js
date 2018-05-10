@@ -5,7 +5,7 @@ const AccountTypes = {
   TEACHER: 3,
   STUDENT: 4,
   UNCONFIRMED_TEACHER: 13,
-  UNCONFIRMED_STUDENT: 14.0,
+  UNCONFIRMED_STUDENT: 14,
 };
 
 export default AccountTypes;

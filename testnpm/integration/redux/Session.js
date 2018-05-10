@@ -10,19 +10,22 @@ const features = [sagas.performLogin];
 const failedState = Object.assign({}, initialState, { errored: true });
 const userData = {
   UNIVERSITY: {},
-  STUDENT: { name: 'Gianluca', surname: 'Marraffa', course: 'Informatica' },
-  TEACHER: { name: 'Tullio', surname: 'Vardanega' },
+  STUDENT: {
+    name: 'Gianluca', surname: 'Marraffa', course: 'Informatica', contract: '0x00',
+  },
+  TEACHER: { name: 'Tullio', surname: 'Vardanega', contract: '0x01' },
   NOTLOGGED: {},
   ADMIN: {},
-  UNCONFIRMED_STUDENT: { name: 'Studente', surname: 'Vero', course: 'Psicologia' },
-  UNCONFIRMED_TEACHER: { name: 'Professore', surname: 'Bravo' },
+  UNCONFIRMED_STUDENT: {},
+  UNCONFIRMED_TEACHER: {},
 };
 
 describe('Session feature', () => {
   describe('login feature', () => {
     Object.keys(AccountEnum).forEach((role) => {
       const val = AccountEnum[role];
-      it(`should login correctly with ${role}`, () => expectSaga(sagas.performLogin)
+      // 28
+      it(`should login correctly with ${role}`, () => expectSaga(sagas.performLogin, sagas.creators.loginAction())
         .withReducer(reducer)
         .provide([
           [matchers.call.fn(getRole), val],

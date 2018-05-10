@@ -10,14 +10,16 @@ contract('UniversityYear', (accounts) => {
   beforeEach('Deploy University contract on blockchain', async () => {
     university = await UniversityYear.new({ from: accounts[0] });
   });
-  it('Should add new academic year', async () => {
+  // 41
+  it('Should add a new academic year', async () => {
     assert.equal(await university.getAcademicYearNumber.call(), 0);
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     assert.equal(await university.getAcademicYearNumber.call(), 1);
     const year = Year.at(await university.getAcademicYearContractByYear.call(2018));
     assert.equal(await year.getSolarYear.call(), 2018);
   });
-  it('Should add and the remove academic year', async () => {
+  // 42
+  it('Should add and then remove academic year', async () => {
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     const yearBefore = Year.at(await university.getAcademicYearContractByYear.call(2018));
     assert.equal(await yearBefore.getSolarYear.call(), 2018);
@@ -25,6 +27,7 @@ contract('UniversityYear', (accounts) => {
     assert.equal(await university.getAcademicYearNumber.call(), 0);
     assert.equal(await university.getAcademicYearContractByYear.call(2018), 0);
   });
+  // 43
   it('Should not add the same year two time', async () => {
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     try {
@@ -34,6 +37,7 @@ contract('UniversityYear', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 44
   it('Should not remove invalid academic year', async () => {
     try {
       await university.removeAcademicYear(2018, { from: accounts[0] });
@@ -42,6 +46,7 @@ contract('UniversityYear', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 45
   it('Shouldn\'t remove not empty academic year', async () => {
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     const year = Year.at(await university.getAcademicYearContractByYear.call(2018));
@@ -56,6 +61,7 @@ contract('UniversityYear', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 46
   it('Should get the same address from index and year', async () => {
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     assert.equal(
@@ -63,6 +69,7 @@ contract('UniversityYear', (accounts) => {
       await university.getAcademicYearContractAt.call(0),
     );
   });
+  // 47
   it('Should add some academic years, delete some and recover the others', async () => {
     assert.equal(await university.getAcademicYearNumber.call(), 0);
     await university.addNewAcademicYear(2018, { from: accounts[0] });

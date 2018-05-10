@@ -7,6 +7,7 @@ python:
   - "2.7"
 notifications:
   email: false
+  slack: 353swe:TBr27Dyzfxr9mmz1qYaWjJiv
 cache:
   directories:
     - node_modules
@@ -22,6 +23,7 @@ jobs:
     - stage: test
       install:
         - npm install
+        - sudo pip install --upgrade pip
         - sudo pip install unirest
       before_script:
         - export STAGE_NAME=test
@@ -33,10 +35,12 @@ jobs:
     - stage: code-coverage
       if: branch = master
       install:
+        - sudo pip install --upgrade pip
         - sudo pip install unirest
         - sudo pip install bs4
       before_script:
         - export STAGE_NAME=coverage
+        - (while sleep 592; do echo "STA BONO TRAVIS"; done;) &
         - npm run rpcov
         - npm run compile
       script:
@@ -49,9 +53,11 @@ jobs:
       if: branch = master
       before_script: export STAGE_NAME=deploy
       script:
+        - npm run testrpc
+        - npm run migrate
         - npm run build-prod
       deploy:
         provider: surge
         project: ./dist/
-        domain: marvin.surge.sh
+        domain: fake.marvin.surge.sh
         skip_cleanup: true

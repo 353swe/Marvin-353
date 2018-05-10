@@ -3,29 +3,29 @@ import updateSagas from './features/updateSagas';
 import { infoString, errorString, successString } from './helpers/colors';
 
 const make = (name, tpl, path) => {
-  let input = fs.readFileSync(tpl, { encoding: 'utf8' });
+  const input = fs.readFileSync(tpl, { encoding: 'utf8' });
   const output = input.replace(/--Name--/g, name);
   fs.writeFileSync(path, output, { flag: "wx" });
 }
-const makeDuck = name => {
+const makeDuck = (name) => {
   const tpl = 'scripts/scaffold/templates/duck.tpl';
   const path = `src/ducks/${name}.js`
   make(name, tpl, path);
   return path;
 };
-const makeSaga = name => {
+const makeSaga = (name) => {
   const tpl = 'scripts/scaffold/templates/saga.tpl';
   const path = `src/sagas/${name}Saga.js`;
   make(name, tpl, path);
   return path;
 };
-const makeIntegrationTest = name => {
+const makeIntegrationTest = (name) => {
   const tpl = 'scripts/scaffold/templates/integration.tpl';
   const path = `testnpm/integration/redux/${name}.js`;
   make(name, tpl, path);
   return path;
 }
-const updateReducers = name => {
+const updateReducers = (name) => {
 
 
 }

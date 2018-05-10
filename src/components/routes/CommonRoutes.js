@@ -5,19 +5,19 @@ import Price from '../public/Price';
 
 const CommonRoutes = [
   {
-    path: 'help',
+    path: '/help',
     label: 'Help',
     position: 'right',
     component: Help,
   },
   {
-    path: 'price',
+    path: '/price',
     label: 'Price',
     position: 'right',
     component: Price,
   },
   {
-    path: 'license',
+    path: '/license',
     label: 'License',
     position: 'none',
     component: License,

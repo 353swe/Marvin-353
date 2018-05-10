@@ -12,6 +12,11 @@ import Utils from './utils';
 
 
 class Field extends React.Component {
+  /**
+   * get the corresponding validation state based on the value returned from the function
+   * @param value the integer with values according to react-bootstrap state enum
+   * @returns {string} of the corresponding state for the field
+   */
   static getValidationStateString(value) {
     let stringValidState;
     switch (value) {
@@ -36,11 +41,16 @@ class Field extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.updateCurrentState = this.updateCurrentState.bind(this);
     this.reset = this.reset.bind(this);
-    this.state = { value: '' };
+    this.updateCurrentState = this.updateCurrentState.bind(this);
+    this.getValidationState = this.getValidationState.bind(this);
+    this.reset = this.reset.bind(this);
+    this.state = { value: '', selected: 0 };
   }
 
+  /**
+   * reset the store when new props are received
+   */
   componentDidMount() {
     this.reset();
   }
@@ -62,7 +72,7 @@ class Field extends React.Component {
   // when I want to update the state of this field you need to change
   // the state and notifiy parent "form" component
   updateCurrentState(setTo) {
-    this.setState({ value: setTo });
+    this.setState({ value: setTo, selected: setTo });
     this.props.onChangeValue(setTo);
   }
 
@@ -75,9 +85,10 @@ class Field extends React.Component {
     }
   }
 
-  // when reset props changes we reset the state value -> textbox or selected value
+  /**
+   * when reset props changes we reset the state value -> textbox or selected value
+    */
   reset() {
-    this.setState({ value: '' });
     this.updateCurrentState('');
   }
 
@@ -97,10 +108,11 @@ class Field extends React.Component {
         ));
         break;
       case FieldTypes.SELECT:
+        options.push(<option key={Utils.generateKey('')} value={null}>{null}</option>);
         this.props.values.map(value => (
           options.push(<option key={Utils.generateKey(value)} value={value}>{value}</option>)
         ));
-        field.push(<FormControl key={Utils.generateKey(name)} componentClass="select" onClick={this.handleChange}>{options}</FormControl>);
+        field.push(<FormControl value={this.state.selected} key={Utils.generateKey(name)} componentClass="select" onChange={this.handleChange}>{options}</FormControl>);
         break;
       case FieldTypes.TEXT:
       default:
@@ -111,6 +123,7 @@ class Field extends React.Component {
           onChange={this.handleChange}
           value={this.state.value}
           key={Utils.generateKey(`field${name}`)}
+          autoComplete="off"
         />);
         break;
     }// switch FieldTypes

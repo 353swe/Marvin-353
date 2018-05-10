@@ -18,7 +18,7 @@ function getExamNumber(address) {
   console.log('Student getExamNumber');
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
-    instance.getExamNumber.call());
+    instance.getExamNumber.call().then(Number));
 }
 
 function getExamContractAt(address, _index) {
@@ -32,14 +32,18 @@ function getExamSubscriptionAt(address, _index) {
   console.log('Student getExamSubscriptionAt');
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
-    instance.getExamSubscriptionAt(_index));
+    instance.getExamSubscriptionAt(_index).then(Boolean));
 }
 
 function getExamValuationAt(address, _index) {
   console.log('Student getExamValuationAt');
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
-    instance.getExamValuationAt(_index));
+    instance.getExamValuationAt(_index).then((valuation) => {
+      let correctEvaluation = Number(valuation);
+      if (correctEvaluation !== 0) correctEvaluation -= 1;
+      return correctEvaluation;
+    }));
 }
 
 function enrollToOptionalExam(address, _index) {
@@ -53,7 +57,7 @@ function getIndexOfExam(address, exam) {
   console.log('Student getIndexOfExam');
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
-    instance.getIndexOfExam(exam));
+    instance.getIndexOfExam(exam).then(Number));
 }
 
 

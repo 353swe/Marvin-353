@@ -1,6 +1,6 @@
 import Index from '../university/Index';
-import UniversityAcademicYears from '../university/UniversityAcademicYears';
-import UniversityAdmin from '../university/UniversityAdmin';
+import UniversityAcademic from '../university/UniversityAcademic'; // eslint-disable-line import/no-named-as-default
+import UniversityAdmin from '../university/UniversityAdmin'; // eslint-disable-line import/no-named-as-default
 
 const UniversityRoutes = [
   {
@@ -9,16 +9,16 @@ const UniversityRoutes = [
     component: Index,
   },
   {
-    path: 'academicyears',
-    label: 'Years',
-    position: 'left',
-    component: UniversityAcademicYears,
-  },
-  {
     path: 'admin',
     label: 'Admin',
     position: 'left',
     component: UniversityAdmin,
+  },
+  {
+    path: 'academicyears',
+    label: 'Years',
+    position: 'left',
+    component: UniversityAcademic,
   },
 ];
 

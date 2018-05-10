@@ -1,28 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import Button from 'react-bootstrap/lib/Button';
 import CardWithIcon from '../custom/CardWithIcon';
 
-const Index = () => (
+export const Index = props => (
+
   <div>
-    <h3 className="text-center">Welcome Teacher</h3>
+    <div>
+      <Jumbotron>
+        <h1>Welcome {props.userName} {props.userSurname}</h1>
+        <p className="jumbotron-text">
+You are logged in Marvin with a teacher account.
+          Here you can manage all your exams and students valuations.
+              To know how much each operation costs please visit the price page.
+        </p>
+        <p>
+          <Button bsStyle="primary" href="price">Price page</Button>
+        </p>
+      </Jumbotron>
+    </div>
     <CardWithIcon
       title="Exams list"
-      text="Show all my exams list"
-      image="default.png"
-      links={[{ path: '/', label: 'Click here to see your exams' }]}
-    />
-    <CardWithIcon
-      title="Optional exams"
-      text="Show all optional exams for my course"
-      image="default.png"
-      links={[{ path: '/', label: 'Click here to see optional exams' }]}
-    />
-    <CardWithIcon
-      title="Summary"
-      text="Show me summary about my all credits and credits to end"
-      image="default.png"
-      links={[{ path: '/', label: 'Click here for summary' }]}
+      text="Show all my exams"
+      image="teacherExams.png"
+      links={[{ path: '/exams', label: 'Click here to see your exams' }]}
     />
   </div>
 );
 
-export default Index;
+Index.propTypes = {
+  userName: PropTypes.string,
+  userSurname: PropTypes.string,
+};
+
+Index.defaultProps = {
+  userName: '',
+  userSurname: '',
+};
+const mapStateToProps = state => ({
+  userName: state.user.data.name,
+  userSurname: state.user.data.surname,
+});
+
+export default connect(mapStateToProps)(Index);

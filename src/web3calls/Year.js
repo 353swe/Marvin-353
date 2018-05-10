@@ -11,7 +11,7 @@ function getCourseNumber(address) {
   console.log('Year getCourseNumber');
   const contractInstance = getYearContract(address);
   return contractInstance.then(instance =>
-    instance.getCourseNumber.call());
+    instance.getCourseNumber.call().then(Number));
 }
 
 function getCourseContractAt(address, _index) {
@@ -26,7 +26,7 @@ function getSolarYear(address) {
   console.log('Year getSolarYear');
   const contractInstance = getYearContract(address);
   return contractInstance.then(instance =>
-    instance.getSolarYear());
+    instance.getSolarYear().then(Number));
 }
 
 function addNewCourse(address, _name, _creditsForGraduation) {

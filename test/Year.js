@@ -13,12 +13,12 @@ contract('User', (accounts) => {
     contract = Year.at(await university.getAcademicYearContractByYear.call(2018));
     await university.addNewAdmin(accounts[1], { from: accounts[0] });
   });
-
+  // 74
   it('Should have the correct default data', async () => {
     assert.equal(await contract.getSolarYear.call(), 2018);
     assert.equal(await contract.getCourseNumber.call(), 0);
   });
-
+  // 75
   it('Should add a new course and retrieve it', async () => {
     assert.equal(await contract.getCourseNumber.call(), 0);
     await contract.addNewCourse(
@@ -36,7 +36,7 @@ contract('User', (accounts) => {
     assert.equal(await course.getSolarYear.call(), 2018);
     assert.equal(await contract.getCourseNumber.call(), 1);
   });
-
+  // 76
   it('Only admin can add new course', async () => {
     await contract.addNewCourse('abc', 180, { from: accounts[1] });
     try {

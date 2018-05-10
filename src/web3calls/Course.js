@@ -1,3 +1,5 @@
+import { toText } from '../util/web3/textConverter';
+
 const contract = require('truffle-contract');
 const contractCourseJson = require('../../build/contracts/Course.json');
 
@@ -11,7 +13,7 @@ function getExamNumber(address) {
   console.log('Course getExamNumber');
   const contractInstance = getCourseContract(address);
   return contractInstance.then(instance =>
-    instance.getExamNumber.call());
+    instance.getExamNumber.call().then(Number));
 }
 
 function getExamContractAt(address, _index) {
@@ -25,21 +27,21 @@ function getName(address) {
   console.log('Course getName');
   const contractInstance = getCourseContract(address);
   return contractInstance.then(instance =>
-    instance.getName.call());
+    instance.getName.call().then(toText));
 }
 
 function getCreditsToGraduate(address) {
   console.log('Course getCreditsToGraduate');
   const contractInstance = getCourseContract(address);
   return contractInstance.then(instance =>
-    instance.getCreditsToGraduate.call());
+    instance.getCreditsToGraduate.call().then(Number));
 }
 
 function getSolarYear(address) {
   console.log('Course getSolarYear');
   const contractInstance = getCourseContract(address);
   return contractInstance.then(instance =>
-    instance.getSolarYear.call());
+    instance.getSolarYear.call().then(Number));
 }
 
 function addNewExam(address, _name, _credits, _obbligatoriety) {

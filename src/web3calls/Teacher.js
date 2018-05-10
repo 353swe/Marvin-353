@@ -11,7 +11,7 @@ function getExamNumber(address) {
   console.log('Teacher getExamNumber');
   const contractInstance = getTeacherContract(address);
   return contractInstance.then(instance =>
-    instance.getExamNumber.call());
+    instance.getExamNumber.call().then(Number));
 }
 
 function getExamContractAt(address, _index) {
@@ -28,7 +28,7 @@ function registerNewVoteStudentExam(address, _examindex, _student, _valuation) {
     instance.registerNewVoteStudentExam(
       _examindex,
       _student,
-      _valuation,
+      (_valuation + 1),
       { from: web3.eth.accounts[0] },
     ));
 }

@@ -16,7 +16,8 @@ const failedState = {
 describe('ManageYears feature', () => {
   GentlyFail(features, reducer, failedState);
   describe('Fetching existents solar years', () => {
-    it('should get an empty list', () => expectSaga(sagas.getAllYears)
+    // 24
+    it('should get an empty list', () => expectSaga(sagas.getAllYears, sagas.creators.getAllYears())
       .withReducer(reducer)
       .provide({
         call: () => 0,
@@ -29,7 +30,8 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should return the correct list', () => expectSaga(sagas.getAllYears)
+    // 25
+    it('should return the correct list', () => expectSaga(sagas.getAllYears, sagas.creators.getAllYears())
       .withReducer(reducer)
       .provide({
         call: (effect, next) => {
@@ -47,7 +49,8 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should add a given year', () => expectSaga(sagas.addYear, { year: 2011 })
+    // 26
+    it('should add a given year', () => expectSaga(sagas.addYear, sagas.creators.addYear(2011))
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(UniversityYear.addNewAcademicYear, 2011), true],
@@ -59,7 +62,8 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should remove an empty year', () => expectSaga(sagas.removeEmptyYear, { year: 2011 })
+    // 27
+    it('should remove an empty year', () => expectSaga(sagas.removeEmptyYear, sagas.creators.removeEmptyYear(2011))
       .withReducer(reducer, { loading: false, errored: false, accademicYears: [2011] })
       .provide([
         [matchers.call.fn(UniversityYear.removeAcademicYear, 2011), true],

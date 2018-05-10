@@ -40,10 +40,12 @@ contract('UniversityStudent', (accounts) => {
       { from: accounts[1] },
     );
   });
+  // 33
   it('Should have correct default data', async () => {
     assert.equal(await university.getStudentNumber.call(), 0);
     assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
   });
+  // 34
   it('Should ask and confirm a student', async () => {
     assert.equal(await university.getStudentNumber.call(), 0);
     assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
@@ -61,6 +63,7 @@ contract('UniversityStudent', (accounts) => {
       await university.getStudentContractAddressAt.call(0),
     );
   });
+  // 35
   it('Should ask and confirm a student 2', async () => {
     // add a new course
     await year.addNewCourse(123, 180, { from: accounts[1] });
@@ -81,6 +84,7 @@ contract('UniversityStudent', (accounts) => {
       await university.getStudentContractAddressAt.call(0),
     );
   });
+  // 36
   it('Should ask, confirm and delete a student', async () => {
     await university.requestStudentAccount(1, 2, course.address, { from: accounts[3] });
     await university.confirmStudent(
@@ -94,6 +98,7 @@ contract('UniversityStudent', (accounts) => {
     assert.equal(await university.getStudentNumber.call(), 0);
     assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
   });
+  // 37
   it('Should ask, but not confirm a student', async () => {
     await university.requestStudentAccount(1, 2, course.address, { from: accounts[3] });
     assert.equal(await university.getStudentNumber.call(), 0);
@@ -105,6 +110,7 @@ contract('UniversityStudent', (accounts) => {
     assert.equal(await university.getStudentNumber.call(), 0);
     assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
   });
+  // 38
   it('Should not confirm invalid student', async () => {
     try {
       await university.confirmStudent(123, { from: accounts[1] });
@@ -113,6 +119,7 @@ contract('UniversityStudent', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 39
   it('Should not remove invalid student', async () => {
     try {
       await university.denyStudent(123, { from: accounts[1] });
@@ -121,7 +128,8 @@ contract('UniversityStudent', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-  it('Should not remove invalid student', async () => {
+  // 40
+  it('Should not deny invalid student', async () => {
     try {
       await university.denyStudent(0, { from: accounts[1] });
     } catch (e) {

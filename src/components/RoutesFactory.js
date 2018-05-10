@@ -12,8 +12,6 @@ import Logout from './public/Logout';
  * @return {array} of Objects links/routes
  */
 function RoutesFactory(userType) {
-  console.log('Creating routing for:');
-  console.log(userType);
   let routes = [];
   switch (userType) {
     case AccountEnum.UNIVERSITY:
@@ -33,7 +31,6 @@ function RoutesFactory(userType) {
       break;
   }
   if (userType !== null && userType !== AccountEnum.NOTLOGGED) {
-    console.log('LOGOUT');
     const logout = [
       {
         path: 'logout',

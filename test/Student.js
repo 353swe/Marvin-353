@@ -56,33 +56,33 @@ contract('Student', (accounts) => {
     );
     student = Student.at(await university.getStudentContractFromPublicAddress.call(accounts[3]));
   });
-
+  // 63
   it('Should get the correct number of exams', async () => {
     assert.equal(await student.getExamNumber.call(), 2);
   });
-
+  // 64
   it('Should get course contract address', async () => {
     assert.equal(await student.getCourseContract.call(), course.address);
   });
-
+  // 65
   it('Should get exams contract addresses', async () => {
     assert.equal(await student.getExamContractAt.call(0), exam1.address);
     assert.equal(await student.getExamContractAt.call(1), exam2.address);
   });
-
+  // 66
   it('Should get the correct default subscription', async () => {
     assert.equal(await student.getExamSubscriptionAt.call(0), true);
     assert.equal(await student.getExamSubscriptionAt.call(1), false);
     assert.equal(await student.getExamValuationAt.call(0), 0);
     assert.equal(await student.getExamValuationAt.call(1), 0);
   });
-
+  // 67
   it('The student can enroll to an optional exam', async () => {
     assert.equal(await student.getExamSubscriptionAt.call(1), false);
     student.enrollToOptionalExam(1, { from: accounts[3] });
     assert.equal(await student.getExamSubscriptionAt.call(1), true);
   });
-
+  // 68
   it('The student can\'t enroll to an exam not optional', async () => {
     try {
       assert.equal(await student.enrollToOptionalExam(0), { from: accounts[3] });
@@ -91,7 +91,7 @@ contract('Student', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 69
   it('The student can\'t enroll two times at the same exam', async () => {
     await student.enrollToOptionalExam(1, { from: accounts[3] });
     try {
@@ -101,7 +101,7 @@ contract('Student', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 70
   it('Only the student can enroll to an optional exam', async () => {
     try {
       await student.enrollToOptionalExam(1, { from: accounts[2] });
@@ -110,11 +110,11 @@ contract('Student', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 71
   it('Should return the index of the exam', async () => {
     assert.equal(await student.getIndexOfExam.call(exam1.address), 0);
   });
-
+  // 72
   it('Should revert if the exam doesn\'t exist', async () => {
     try {
       assert.equal(await student.getIndexOfExam.call(accounts[0]), 0);
@@ -123,7 +123,7 @@ contract('Student', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 73
   it('Should not register a valuation if not the correct professor', async () => {
     try {
       assert.equal(await student.registerValuation(0, 20, { from: accounts[7] }));

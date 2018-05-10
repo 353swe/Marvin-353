@@ -38,7 +38,7 @@ contract('Exam', (accounts) => {
     await course.addNewExam(456, 10, false, { from: accounts[1] });
     exam2 = Exam.at(await course.getExamContractAt.call(1));
   });
-
+  // 77
   it('Should have the correct data', async () => {
     assert.equal(await exam1.getEnrolledNumber.call(), 0);
     assert.equal(await exam1.getCourse.call(), course.address);
@@ -51,13 +51,13 @@ contract('Exam', (accounts) => {
       0x7b00000000000000000000000000000000000000000000000000000000000000,
     );
   });
-
+  // 78
   it('A student should enroll to the exam', async () => {
     assert.equal(await exam2.getEnrolledNumber.call(), 0);
     await exam2.addMeAsSubscriber({ from: accounts[3] });
     assert.equal(await exam2.getEnrolledNumber.call(), 1);
   });
-
+  // 79
   it('Only the admin can add an exam', async () => {
     try {
       await course.addNewExam(123, 12, true, { from: accounts[2] });
@@ -66,7 +66,7 @@ contract('Exam', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 80
   it('Shouldn\'t remove a subscriber if not from University', async () => {
     try {
       await exam1.removeSubscriber(21312312, { from: accounts[2] });
@@ -75,7 +75,7 @@ contract('Exam', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 81
   it('Shouldn\'t subscribe two times', async () => {
     await exam1.addMeAsSubscriber({ from: accounts[7] });
     try {

@@ -6,26 +6,17 @@ class RedirectToHome extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       // history.push('/');
-      document.location.href = '/';
-    }, this.props.time);
+      document.location.href = `/?type=${this.props.type}&message=${this.props.message}`;
+    }, 1000);
   }
   render() {
-    return (
-      <div>
-        If you are not redirect to the homepage in&nbsp;
-        {Math.round(this.props.time / 1000)} seconds&nbsp;
-        <a href="/">click here</a>
-      </div>
-    );
+    return null;
   }
 }
 
 RedirectToHome.propTypes = {
-  time: PropTypes.number,
-};
-
-RedirectToHome.defaultProps = {
-  time: 1000,
+  type: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 export default RedirectToHome;

@@ -7,6 +7,11 @@ class ErrorTaker extends React.Component {
     this.state = { hasError: false };
   }
 
+  /**
+   * catches any error generated in the page container
+   * @param error
+   * @param info
+   */
   componentDidCatch(error, info) {
     this.setState(state => ({ ...state, hasError: true }));
     console.log(error, info);

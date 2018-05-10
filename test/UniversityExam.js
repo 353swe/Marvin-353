@@ -35,6 +35,7 @@ contract('UniversityExam', (accounts) => {
     await course.addNewExam(123, 12, true, { from: accounts[1] });
     exam = await Exam.at(await course.getExamContractAt.call(0));
   });
+  // 48
   it('An admin can associate a teacher to an exam', async () => {
     await university.associateTeacherToExam(
       teacher.address,
@@ -43,7 +44,8 @@ contract('UniversityExam', (accounts) => {
     );
     assert.equal(await exam.getTeacherContract.call(), teacher.address);
   });
-  it('The exam has to be removed is reassigned to another', async () => {
+  // 49
+  it('The exam has to be removed to be reassigned to another teacher', async () => {
     await university.associateTeacherToExam(
       teacher.address,
       exam.address,
@@ -67,6 +69,7 @@ contract('UniversityExam', (accounts) => {
     assert.equal(await teacher2.getExamNumber.call(), 1);
     assert.equal(await teacher.getExamNumber.call(), 0);
   });
+  // 50
   it('Only an admin can associate a teacher to an exam', async () => {
     try {
       await university.associateTeacherToExam(
@@ -79,6 +82,7 @@ contract('UniversityExam', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 51
   it('Cannot associate a wrong admin address', async () => {
     try {
       await university.associateTeacherToExam(
@@ -91,6 +95,7 @@ contract('UniversityExam', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  // 52
   it('Cannot associate a wrong exam address', async () => {
     try {
       await university.associateTeacherToExam(

@@ -78,3 +78,32 @@ nav.navbar.navbar-default {
   background-color: white;
 }
 
+.loadingSpinner{
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+
+.spinner {
+  margin: 50px;
+  height: 40px;
+  width: 40px;
+  animation: rotate 0.8s infinite linear;
+  border: 8px solid #2196f3;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+input[type='checkbox'] {
+  margin-right: 0.6em;
+}
+
+@keyframes rotate {
+  0%    { transform: rotate(0deg); }
+  100%  { transform: rotate(360deg); }
+}
+
+.progress {height: 18px;}
+.jumbotron-text {
+  color: #434345;
+}

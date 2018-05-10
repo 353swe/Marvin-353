@@ -56,7 +56,7 @@ contract('Teacher', (accounts) => {
     );
     student = Student.at(await university.getStudentContractFromPublicAddress.call(accounts[3]));
   });
-
+  // 54
   it('The teacher should register a valuation', async () => {
     assert.equal(await teacher.getExamContractAt.call(0), exam1.address);
     assert.equal(await exam1.getEnrolledNumber.call(), 1);
@@ -64,7 +64,7 @@ contract('Teacher', (accounts) => {
     await teacher.registerNewVoteStudentExam(0, 0, 19, { from: accounts[2] });
     assert.equal(await student.getExamValuationAt.call(0), 19);
   });
-
+  // 55
   it('Shouldn\'t register incorrect valuation (zero)', async () => {
     try {
       await teacher.registerNewVoteStudentExam(0, 0, 0, { from: accounts[2] });
@@ -73,7 +73,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 56
   it('Shouldn\'t register two valuation', async () => {
     await teacher.registerNewVoteStudentExam(0, 0, 17, { from: accounts[2] });
     try {
@@ -83,7 +83,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 57
   it('Shouldn\'t register incorrect valuation (too high)', async () => {
     try {
       await teacher.registerNewVoteStudentExam(0, 0, 33, { from: accounts[2] });
@@ -92,7 +92,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 58
   it('Shouldn\'t add exam if not from university contract', async () => {
     try {
       await teacher.addExam(0, { from: accounts[5] });
@@ -101,7 +101,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 59
   it('Shouldn\'t register a student not enrolled', async () => {
     try {
       await teacher.registerNewVoteStudentExam(1, 0, 22, { from: accounts[2] });
@@ -110,7 +110,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 60
   it('Shouldn\'t register a valuation to student not confirmed by ad admin', async () => {
     await university.requestStudentAccount(123, 456, course.address, { from: accounts[4] });
     try {
@@ -120,7 +120,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 61
   it('Shouldn\'t register a valuation if isn\'t the correct professor', async () => {
     // add a teacher
     await university.requestTeacherAccount(123, 456, { from: accounts[4] });
@@ -135,7 +135,7 @@ contract('Teacher', (accounts) => {
     }
     throw new Error('Test failed!');
   });
-
+  // 62
   it('Should return the number of the exams', async () => {
     // add a teacher
     await university.requestTeacherAccount(123, 456, { from: accounts[4] });
