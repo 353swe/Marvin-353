@@ -49,12 +49,6 @@ describe('UniversityAdmin component', () => {
      */
     expect(wrapper.find('div').children()).to.have.length(3);
     expect(wrapper.state().delete).to.equal(false);
-    // pageCompShallow.find('input[name="addressAdmin"]').
-    // simulate('change', {target: {value: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf'}});
-
-    // pageCompShallow.find('form').simulate('submit');
-
-    // expect(addedAdmin.to.equal(1));
   });
   // 216
   it('Should viewDelete set right the state', () => {

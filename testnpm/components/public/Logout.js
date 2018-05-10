@@ -5,7 +5,7 @@ import { Image } from 'react-bootstrap';
 import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
 import Logout from '../../../src/components/public/Logout';
 
-describe('Help component', () => {
+describe('Logout component', () => {
   // 150
   it('Should render the component', () => {
     const wrapper = shallow(<Logout />);

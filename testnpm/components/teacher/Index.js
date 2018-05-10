@@ -14,7 +14,7 @@ describe('Index Teacher', () => {
     expect(wrapper.find(CardWithIcon)).to.have.length(1);
   });
   // 192
-  it('Should render the correct bootsrap component', () => {
+  it('Should render the correct bootstrap component', () => {
     const wrapper = shallow(<Index />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Jumbotron)).to.have.length(1);
