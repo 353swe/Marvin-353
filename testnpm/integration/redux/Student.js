@@ -124,7 +124,7 @@ describe('Student feature', () => {
           teacherAddress: '0x0001',
           teacherName: 'marco',
           teacherSurname: 'laMalfa',
-          valuation: 29,
+          valuation: 30,
           subscription: true,
         },
         {
@@ -135,7 +135,7 @@ describe('Student feature', () => {
           teacherAddress: '0x0002',
           teacherName: 'matteo',
           teacherSurname: 'lodi',
-          valuation: 22,
+          valuation: 23,
           subscription: true,
         },
       ],

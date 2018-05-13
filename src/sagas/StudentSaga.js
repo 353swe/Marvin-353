@@ -24,7 +24,7 @@ export function* getExams(action) {
     const examsData = yield all(apiExamDataCall);
     const apiExamValuationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, i));
-    const examsValuation = (yield all(apiExamValuationCall)).map(x => (x === 0 ? null : x - 1));
+    const examsValuation = (yield all(apiExamValuationCall)).map(x => (x === 0 ? null : x));
     const apiExamSubscriptionCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamSubscriptionAt, action.address, i));
     const examsSubscription = yield all(apiExamSubscriptionCall);

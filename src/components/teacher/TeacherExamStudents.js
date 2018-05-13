@@ -52,7 +52,7 @@ export class TeacherExamStudents extends React.Component {
   addGradeBuilder(objForm) {
     let grade = Number(objForm.grade.value);
     if (grade < 0) grade = 0;
-    if (grade > 30) grade = 32;
+    if (grade > 30) grade = 31;
     this.setState({
       viewModalAddVote: false,
     });
