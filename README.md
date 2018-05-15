@@ -168,5 +168,5 @@ automatically done from Travis or other CI platform.
 
 Donation
 ============
-Ethereum: 0xd5BF166370Ff79A1854a4CACfE583973D337Fbcb
+Ethereum: 0xd5BF166370Ff79A1854a4CACfE583973D337Fbcb \
 BitCoin: 1AL37969Wuky8mg6TLYxryiCs4nXY6qE8E
