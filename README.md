@@ -6,13 +6,13 @@
 
 Members of group 353:
 
- - Cailotto Mirco
- - Giorato E. Riccardo
- - Marcon Valentina
- - Marraffa Gianluca
- - Mattiazzo Elena
- - Singh Parwinder
- - Stocco Davide
+ - [Cailotto Mirco](https://github.com/M9k)
+ - [Giorato E. Riccardo](https://github.com/Giorat)
+ - [Marcon Valentina](https://github.com/ValeMarcon)
+ - [Marraffa Gianluca](https://github.com/gmarraffa)
+ - [Mattiazzo Elena](https://github.com/elenamattiazzo)
+ - [Singh Parwinder](https://github.com/SinghParwinder)
+ - [Stocco Davide](https://github.com/Stocci)
 
 
 Installation
